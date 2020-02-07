@@ -24,9 +24,6 @@ class MainActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener, View.
         anims.add(AnimationUtils.loadAnimation(this, R.anim.top_left_right))
         anims.add(AnimationUtils.loadAnimation(this, R.anim.bottom_left_right))
 
-//        anim.repeatCount = TranslateAnimation.INFINITE
-//        anim.repeatMode = TranslateAnimation.RESTART
-
         anim?.duration = seekBar.progress.toLong()
         vBox.animation = anim
 
@@ -46,16 +43,16 @@ class MainActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener, View.
     }
 
     override fun onStopTrackingTouch(seekBar: SeekBar?) {
-        vBox.clearAnimation()
-        txtSpeed.text = seekBar?.progress.toString()
-        anim?.duration = seekBar?.progress!!.toLong()
-        vBox.animation = anim
-        vBox.animate()
+        performAnimation()
     }
 
     override fun onClick(v: View?) {
-        vBox.clearAnimation()
         anim = anims.random()
+        performAnimation()
+    }
+
+    fun performAnimation(){
+        vBox.clearAnimation()
         txtSpeed.text = seekBar?.progress.toString()
         anim?.duration = seekBar?.progress!!.toLong()
         vBox.animation = anim
